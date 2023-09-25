@@ -2,6 +2,8 @@ import React from 'react';
 import styled, {ThemeProvider} from "styled-components/native";
 import {theme} from './theme';
 import {StatusBar} from "react-native";
+import Input from "./components/Input";
+import {useState} from "react";
 
 const Container = styled.SafeAreaView`
   flex: 1;
@@ -19,12 +21,26 @@ const Title = styled.Text`
 `;
 
 export default function App(){
+    const [newTask, setNewTask] = useState('');
+    const _addTask = () => {
+        alert(`Add: ${newTask}`);
+        setNewTask('');
+    };
+
+    const _handleTextChange = (text) => {
+        setNewTask(text);
+    };
     return (
         <ThemeProvider theme={theme}>
             <Container>
                 <StatusBar barStyle="light-content"
                            backgroundColor={theme.background}/>
-                <Title>TODO List</Title>
+                <Title>TODO</Title>
+                <Input
+                    placeholder="+ Add a Task"
+                    onChangeText={_handleTextChange}
+                    onSubmitEditing={_addTask}
+                />
             </Container>
         </ThemeProvider>
     )
