@@ -16,22 +16,24 @@ const Container = styled.View`
 const Contents = styled.Text`
   flex: 1;
   font-size: 24px;
-  color: ${({theme}) => theme.text};
+  color: ${({theme, completed}) => (completed ? theme.done : theme.text)};
+  text-decoration-line: ${({completed}) => (completed ? 'line-through' : 'none')};
 `;
 
-const Task = ({item, deleteTask}) => {
+const Task = ({item, toggleTask, deleteTask}) => {
     return (
         <Container>
-            <IconButton type={images.uncompleted}/>
-            <Contents>{item.text}</Contents>
-            <IconButton type={images.update}/>
-            <IconButton type={images.delete} id={item.id} onPressOut={deleteTask}/>
+            <IconButton type={item.completed ? images.completed : images.uncompleted} id={item.id} onPressOut={toggleTask} completed={item.completed}/>
+            <Contents completed={item.completed}>{item.text}</Contents>
+            {item.completed || <IconButton type={images.update}/>}
+            <IconButton type={images.delete} id={item.id} onPressOut={deleteTask} completed={item.completed}/>
         </Container>
     );
 };
 
 Task.propTypes = {
     item: PropTypes.object.isRequired,
+    toggleTask: PropTypes.func.isRequired,
     deleteTask: PropTypes.func.isRequired,
 };
 
