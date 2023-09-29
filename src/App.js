@@ -62,11 +62,16 @@ export default function App(){
         const currentTasks = Object.assign({}, tasks);
         currentTasks[item.id] = item;
         setTasks(currentTasks);
-    }
+    };
 
     const _handleTextChange = (text) => {
         setNewTask(text);
     };
+
+    const _onBlur = () => {
+      setNewTask('');
+    };
+
     return (
         <ThemeProvider theme={theme}>
             <Container>
@@ -77,6 +82,7 @@ export default function App(){
                     placeholder="+ Add a Task"
                     onChangeText={_handleTextChange}
                     onSubmitEditing={_addTask}
+                    onBlur={_onBlur}
                 />
                 <List width={width}>
                     {Object.values(tasks).reverse().map(item => (

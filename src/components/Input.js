@@ -17,7 +17,7 @@ const StyledInput = styled.TextInput.attrs(({theme}) => ({
   color: ${({theme}) => theme.text};
 `;
 
-const Input = ({placeholder, value, onChangeText, onSubmitEditing}) => {
+const Input = ({placeholder, value, onChangeText, onSubmitEditing, onBlur}) => {
     //const width = Dimensions.get('window').width; // Dimensions: 현재 기기의 화면 크기 구함 -> 다양한 기기에 동일한 모습으로 화면 적용
     const width = useWindowDimensions().width; // useWindowDimensions: Dimension과 같은 기능. Dimension과 달리 화면의 크기가 변경되면 화면의 크기, 너비, 높이를 자동으로 업데이트
     return (
@@ -32,6 +32,7 @@ const Input = ({placeholder, value, onChangeText, onSubmitEditing}) => {
             value={value}
             onChangeText={onChangeText}
             onSubmitEditing={onSubmitEditing}
+            onBlur={onBlur}
         />
     );
 };
@@ -41,6 +42,7 @@ Input.propTypes = {
     value: PropTypes.string.isRequired,
     onChangeText: PropTypes.func.isRequired,
     onSubmitEditing: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
 }
 
 export default Input;
