@@ -23,7 +23,7 @@ const Contents = styled.Text`
 
 const Task = ({item, toggleTask, deleteTask, updateTask}) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [text, setText] = useState(item.text);
+    const [text, setText] = useState(item.text || '');
     const _handleUpdateButtonPress = () => {
         setIsEditing(true);
     };
